@@ -13,9 +13,9 @@ spec:
           - name: argo-source
             path: /src
             git:
-              repo: https://github.com/argoproj/argo-workflows.git
+              repo: https://github.com/sadoMasupilami/cncf_workflows.git
               revision: "master"
       container:
         image: debian
         command: [sh, -c]
-        args: ["ls -l /src /bin/kubectl /s3"]
+        args: ["ls -l /src/k8s-resources"]
