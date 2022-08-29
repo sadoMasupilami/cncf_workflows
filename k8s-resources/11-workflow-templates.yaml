@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: hello-world-template-local-arg
+spec:
+  templates:
+    - name: hello-world
+      inputs:
+        parameters:
+          - name: msg
+            value: "hello CNCF chapter Graz"
+      container:
+        image: docker/whalesay
+        command: [cowsay]
+        args: ["{{inputs.parameters.msg}}"]
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: hello-world-local-arg-
+spec:
+  entrypoint: whalesay
+  templates:
+    - name: whalesay
+      steps:
+        - - name: hello-world
+            templateRef:
+              name: hello-world-template-local-arg
+              template: hello-world
